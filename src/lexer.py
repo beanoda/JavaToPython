@@ -23,3 +23,7 @@ t_FLOAT = r"\d+\.\d+"
 # Java has bytes, shorts, ints, and longs which are all just integers
 # inside of Python
 t_INT = r"\d+"
+
+# Tabs matter in Python but in Java, they do not
+# There might be an issue here later on when I start parsing files
+t_ignore = " \t\n\r"
