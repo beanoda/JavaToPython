@@ -19,5 +19,6 @@ tokens = (
 # ill implement Java's floats later
 t_FLOAT = r"\d+\.\d+"
 
-# It's important this is placed after FLOAT
+# Java has bytes, shorts, ints, and longs which are all just integers
+# inside of Python
 t_INT = r"\d+"
