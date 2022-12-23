@@ -9,4 +9,9 @@ all the code into a single file
 """
 
 
-tokens = ()
+tokens = (
+    "INT",  # INT short for Integer
+)
+
+# It's important this is placed after FLOAT
+t_INT = r"\d+"
