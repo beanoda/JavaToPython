@@ -9,7 +9,9 @@ all the code into a single file
 """
 
 
-literals = ["+", "-", "*", "/"]
+literals = [
+    "+", "-", "*", "/",  # Arithmetic
+]
 tokens = (
     "INT",  # INT short for Integer,
     "FLOAT",
