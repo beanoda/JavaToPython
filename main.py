@@ -2,11 +2,11 @@
 Main module which interacts with the source directory
 """
 
-from src import lexer
-from ply import lex
+from src import lexer, parser
+from ply import lex, yacc
 
 
-def tokenize(input_data: str):
+def tokenize(input_data: str) -> None:
     """ Tests the lexer given input """
 
     built_lexer = lex.lex(module=lexer)
@@ -21,7 +21,13 @@ def tokenize(input_data: str):
         print(token)
 
 
+def parse(input_data: str) -> None:
+    built_lexer = lex.lex(module=lexer)
+    built_parser = yacc.yacc(module=parser)
+    print(built_parser.parse(input_data, lexer=built_lexer))
+
+
 if __name__ == "__main__":
     while True:
         data = input(">>> ")
-        tokenize(data)
+        parse(data)
