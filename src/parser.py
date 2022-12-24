@@ -9,10 +9,22 @@ into the parser as possible to give the transpiler as an easier time
 
 # The parser must have this tuple inside of the scope at all times
 from src.lexer import tokens
+from src import components
 
 
 def p_program(p):
     """
-    program : INT
+    program : factor
     """
     p[0] = p[1]
+
+
+def p_factor(p):
+    """
+    factor : INT
+           | FLOAT
+    """
+
+    # Integer and Float classes may be redundant
+    p[0] = components.Factor(p[1])
+
