@@ -9,42 +9,42 @@ for a Float, and for a Function.
 """
 
 
-from dataclasses import dataclass
+import dataclasses
 from typing import *
-import enum
+from enum import Enum
 
 
-@dataclass
+@dataclasses.dataclass
 class Integer(object):
     value: AnyStr
 
 
-@dataclass
+@dataclasses.dataclass
 class Float(object):
     value: AnyStr
 
 
-@dataclass
+@dataclasses.dataclass
 class Factor(object):
     value: Union[Integer, Float]
 
 
-@dataclass
+@dataclasses.dataclass
 class Term(object):
     left: Factor
     operator: Operator
     right: Factor
 
 
-@dataclass
+@dataclasses.dataclass
 class Expression(object):
     left: Term
     operator: Operator
     right: Term
 
 
-@dataclass
-class Operator(enum.Enum):
+@dataclasses.dataclass
+class Operator(Enum):
     PLUS = "+"
     MINUS = "-"
     MULTIPLY = "*"
