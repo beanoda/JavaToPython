@@ -21,7 +21,7 @@ class Integer(object):
 
 @dataclass
 class Float(object):
-    value: float
+    value: AnyStr
 
 
 @dataclass
