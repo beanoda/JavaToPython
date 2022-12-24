@@ -16,7 +16,7 @@ import enum
 
 @dataclass
 class Integer(object):
-    value: int
+    value: AnyStr
 
 
 @dataclass
