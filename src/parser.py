@@ -41,4 +41,3 @@ def p_factor(p):
     """
 
     p[0] = components.Factor(p[1])
-

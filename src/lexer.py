@@ -29,3 +29,9 @@ t_INT = r"\d+"
 # Tabs matter in Python but in Java, they do not
 # There might be an issue here later on when I start parsing files
 t_ignore = " \t\n\r"
+
+
+# Ill further implement this later
+def t_error(t):
+    print(f"Unknown Character {t.value}")
+    t.lexer.skip(1)
