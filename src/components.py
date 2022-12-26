@@ -44,7 +44,7 @@ class Factor(object):
     unary: bool = False
 
     def __repr__(self):
-        return f"-{self.value}" if self.unary else self.value
+        return f"-({self.value})" if self.unary else self.value
 
 
 @dataclasses.dataclass
