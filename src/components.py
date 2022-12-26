@@ -47,6 +47,9 @@ class Factor(object):
 
     value: Union[Integer, Float]
 
+    def __repr__(self):
+        return self.value
+
 
 @dataclasses.dataclass
 class Term(object):
@@ -64,6 +67,11 @@ class Term(object):
     left: Factor
     operator: Operator
     right: Factor
+
+    def __repr__(self):
+        if self.operator is Operator.MULTIPLY:
+            return f"{self.left}*{self.right}"
+        return f"{self.left}/{self.right}"
 
 
 @dataclasses.dataclass
