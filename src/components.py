@@ -34,10 +34,17 @@ class BinaryOperation(object):
 
 @dataclasses.dataclass
 class Factor(object):
+    """
+    Unary refers to unary minus which deals with negative
+    numbers. Ex: -1 is an example of unary minus but 1 is
+    simply a factor
+    """
+
     value: AnyStr
+    unary: bool = False
 
     def __repr__(self):
-        return self.value
+        return f"-{self.value}" if self.unary else self.value
 
 
 @dataclasses.dataclass

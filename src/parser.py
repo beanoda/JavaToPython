@@ -13,8 +13,9 @@ from src import components
 
 
 precedence = (
-    ('left', '+', '-'),
-    ('left', '*', '/'),
+    ('left', '+', '-'),  # Level 1
+    ('left', '*', '/'),  # Level 2
+    ('right', 'UMINUS'),  # Level 3; Uminus = unary minus
 )
 
 
@@ -52,3 +53,14 @@ def p_expression_factor(p):
     """
 
     p[0] = components.Factor(p[1])
+
+
+def p_expression_uminus(p):
+    """
+    expression : '-' expression %prec UMINUS
+    """
+
+    # UMINUS is not a token nor is it a rule.
+    # This just tells the parser to use the precedence
+    # designated for UMINUS and apply it to this rule
+    p[0] = components.Factor(p[2], True)
