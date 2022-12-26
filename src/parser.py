@@ -32,27 +32,24 @@ def p_expression_bin_op(p):
                | expression '-' expression
                | expression '*' expression
                | expression '/' expression
-    """
-
-    if p[2] == "+":
-        operator = components.Operator.PLUS
-    elif p[2] == "-":
-        operator = components.Operator.MINUS
-    elif p[2] == "*":
-        operator = components.Operator.MULTIPLY
-    else:
-        operator = components.Operator.DIVIDE
-
-    p[0] = components.BinaryOperation(p[1], operator, p[3])
-
-
-def p_expression_factor(p):
-    """
-    expression : INT
+               | INT
                | FLOAT
     """
 
-    p[0] = components.Factor(p[1])
+    # Check if the rule is a factor or binary op
+    if len(p.slice) < 3:
+        p[0] = components.Factor(p[1])
+    else:
+        if p[2] == "+":
+            operator = components.Operator.PLUS
+        elif p[2] == "-":
+            operator = components.Operator.MINUS
+        elif p[2] == "*":
+            operator = components.Operator.MULTIPLY
+        else:
+            operator = components.Operator.DIVIDE
+
+        p[0] = components.BinaryOperation(p[1], operator, p[3])
 
 
 def p_expression_uminus(p):
