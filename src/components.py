@@ -27,6 +27,10 @@ class BinaryOperation(object):
     operation: Operator
     right: Union[Factor, AnyStr]
 
+    def __repr__(self):
+        return "(" + repr(self.left) + \
+               self.operation.value + repr(self.right) + ")"
+
 
 @dataclasses.dataclass
 class Factor(object):

@@ -12,6 +12,12 @@ from src.lexer import tokens
 from src import components
 
 
+precedence = (
+    ('left', '+', '-'),
+    ('left', '*', '/'),
+)
+
+
 def p_program(p):
     """
     program : expression
@@ -27,7 +33,16 @@ def p_expression_bin_op(p):
                | expression '/' expression
     """
 
-    p[0] = components.BinaryOperation(p[1], components.Operator.PLUS, p[3])
+    if p[2] == "+":
+        operator = components.Operator.PLUS
+    elif p[2] == "-":
+        operator = components.Operator.MINUS
+    elif p[2] == "*":
+        operator = components.Operator.MULTIPLY
+    else:
+        operator = components.Operator.DIVIDE
+
+    p[0] = components.BinaryOperation(p[1], operator, p[3])
 
 
 def p_expression_factor(p):
