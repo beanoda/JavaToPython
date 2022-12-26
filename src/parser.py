@@ -26,7 +26,7 @@ def p_program(p):
     p[0] = p[1]
 
 
-def p_expression_bin_op(p):
+def p_expression(p):
     """
     expression : expression '+' expression
                | expression '-' expression
@@ -34,10 +34,15 @@ def p_expression_bin_op(p):
                | expression '/' expression
                | INT
                | FLOAT
+               | '-' expression %prec UMINUS
     """
 
-    # Check if the rule is a factor or binary op
-    if len(p.slice) < 3:
+    if p[1] == "-":
+        # UMINUS is not a token nor is it a rule.
+        # This just tells the parser to use the precedence
+        # designated for UMINUS and apply it to this rule
+        p[0] = components.Factor(p[2], True)
+    elif len(p.slice) < 3:
         p[0] = components.Factor(p[1])
     else:
         if p[2] == "+":
@@ -50,14 +55,3 @@ def p_expression_bin_op(p):
             operator = components.Operator.DIVIDE
 
         p[0] = components.BinaryOperation(p[1], operator, p[3])
-
-
-def p_expression_uminus(p):
-    """
-    expression : '-' expression %prec UMINUS
-    """
-
-    # UMINUS is not a token nor is it a rule.
-    # This just tells the parser to use the precedence
-    # designated for UMINUS and apply it to this rule
-    p[0] = components.Factor(p[2], True)
