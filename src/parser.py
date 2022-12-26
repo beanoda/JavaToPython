@@ -14,9 +14,24 @@ from src import components
 
 def p_program(p):
     """
-    program : factor
+    program : term
+            | factor
     """
     p[0] = p[1]
+
+
+def p_term(p):
+    """
+    term : factor '*' factor
+         | factor '/' factor
+    """
+
+    if p[2] == "*":
+        operation = components.Operator.MULTIPLY
+    else:
+        operation = components.Operator.DIVIDE
+
+    p[0] = components.Term(p[1], operation, p[3])
 
 
 def p_factor(p):
