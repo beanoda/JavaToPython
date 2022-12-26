@@ -15,59 +15,25 @@ from enum import Enum
 
 
 @dataclasses.dataclass
+class BinaryOperation(object):
+    """
+    I have decided to opt for few arithmetic classes
+    and implement order of operations through the parser's
+    precedence instead of writing a bunch of classes
+    just for order of operations
+    """
+
+    left: Union[Factor, AnyStr]
+    operation: Operator
+    right: Union[Factor, AnyStr]
+
+
+@dataclasses.dataclass
 class Factor(object):
-    """
-    *Factors* are the building blocks of *Terms* and
-    *Expressions*
-
-    - **value**: is an *Integer* or a *Float*
-    """
-
     value: AnyStr
 
     def __repr__(self):
         return self.value
-
-
-@dataclasses.dataclass
-class Term(object):
-    """
-    *Terms* amalgamate two *Factors* together using a
-    multiplication (*) or division (/) operator
-
-    - **left**: is a *Factor*
-
-    - **operator**: is an *Operator* (either MULTIPLY or DIVIDE)
-
-    - **right**: is a *Factor*
-    """
-
-    left: Factor
-    operator: Operator
-    right: Factor
-
-    def __repr__(self):
-        if self.operator is Operator.MULTIPLY:
-            return f"{self.left}*{self.right}"
-        return f"{self.left}/{self.right}"
-
-
-@dataclasses.dataclass
-class Expression(object):
-    """
-    *Expressions* can get quite complex. *Terms* and
-    *Factors* are their primary components along with
-    *Operators*, however, *Expressions* can contain other
-    *Expressions*
-
-    - **left**: is a *Term*
-    - **operator**: is an *Operator* (either PLUS or MINUS)
-    - **right** is a *Term*
-    """
-
-    left: Term
-    operator: Operator
-    right: Term
 
 
 @dataclasses.dataclass

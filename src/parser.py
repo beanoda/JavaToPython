@@ -14,30 +14,26 @@ from src import components
 
 def p_program(p):
     """
-    program : term
-            | factor
+    program : expression
     """
     p[0] = p[1]
 
 
-def p_term(p):
+def p_expression_bin_op(p):
     """
-    term : factor '*' factor
-         | factor '/' factor
+    expression : expression '+' expression
+               | expression '-' expression
+               | expression '*' expression
+               | expression '/' expression
     """
 
-    if p[2] == "*":
-        operation = components.Operator.MULTIPLY
-    else:
-        operation = components.Operator.DIVIDE
-
-    p[0] = components.Term(p[1], operation, p[3])
+    p[0] = components.BinaryOperation(p[1], components.Operator.PLUS, p[3])
 
 
-def p_factor(p):
+def p_expression_factor(p):
     """
-    factor : INT
-           | FLOAT
+    expression : INT
+               | FLOAT
     """
 
     p[0] = components.Factor(p[1])
