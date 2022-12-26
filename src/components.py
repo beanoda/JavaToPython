@@ -4,36 +4,14 @@ from __future__ import annotations
 This module contains classes that represent parts of
 the Python language
 
-For instance, there is a component (class) for an Integer,
-for a Float, and for a Function.
+For instance, there is a component (class) for an Expression,
+for a While Loop, and for a Function.
 """
 
 
 import dataclasses
 from typing import *
 from enum import Enum
-
-
-@dataclasses.dataclass
-class Integer(object):
-    """
-    *Integer* represents a Python integer
-
-    - **value**: a field that stores the integer value as a string
-    """
-
-    value: AnyStr
-
-
-@dataclasses.dataclass
-class Float(object):
-    """
-    _Float_ represents a Python float
-
-    - **value**: a field that stores the float value as a string
-    """
-
-    value: AnyStr
 
 
 @dataclasses.dataclass
@@ -45,7 +23,7 @@ class Factor(object):
     - **value**: is an *Integer* or a *Float*
     """
 
-    value: Union[Integer, Float]
+    value: AnyStr
 
     def __repr__(self):
         return self.value

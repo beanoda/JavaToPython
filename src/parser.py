@@ -40,6 +40,5 @@ def p_factor(p):
            | FLOAT
     """
 
-    # Integer and Float classes may be redundant
     p[0] = components.Factor(p[1])
 
