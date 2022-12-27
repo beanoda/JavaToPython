@@ -35,6 +35,8 @@ reserved = {
     "implements": "IMPLEMENTS",
     "import": "IMPORT",
     "instanceof": "INSTANCEOF",
+    "int": "INT",
+    "interface": "INTERFACE",
     "long": "LONG",
     "native": "NATIVE",
     "new": "NEW",
@@ -67,13 +69,18 @@ reserved = {
     "false": "FALSE",
     "null": "NULL",
 }
+
 literals = [
     "+", "-", "*", "/",  # Arithmetic
+    "=",  # Assignment/Comparison
 ]
+
 tokens = (
-    "INT",  # INT short for Integer,
+    "INT",  # short for Integer,
     "FLOAT",
-)
+
+    "ID",  # short for Identifier
+) + tuple(reserved.values())
 
 # Java's doubles are just floats in Python
 # Java's floats are difficult because they have an f appended to them
@@ -87,6 +94,13 @@ t_INT = r"\d+"
 # Tabs matter in Python but in Java, they do not
 # There might be an issue here later on when I start parsing files
 t_ignore = " \t\n\r"
+
+
+def t_ID(t):
+    r"""[a-zA-Z_][a-zA-Z_0-9]*"""
+
+    t.type = reserved.get(t.value, "ID")
+    return t
 
 
 # Ill further implement this later

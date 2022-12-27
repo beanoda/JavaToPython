@@ -22,6 +22,7 @@ precedence = (
 def p_program(p):
     """
     program : expression
+            | var_assignment
     """
     p[0] = p[1]
 
@@ -55,3 +56,11 @@ def p_expression(p):
             operator = components.Operator.DIVIDE
 
         p[0] = components.BinaryOperation(p[1], operator, p[3])
+
+
+def p_var_assignment(p):
+    """
+    var_assignment : INT ID '=' expression
+    """
+
+    p[0] = components.VariableAssignment(p[2], p[4])

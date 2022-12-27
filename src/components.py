@@ -58,3 +58,20 @@ class Operator(Enum):
     MINUS = "-"
     MULTIPLY = "*"
     DIVIDE = "/"
+
+
+@dataclasses.dataclass
+class VariableAssignment(object):
+    """
+    Variables in Java are different than in Python.
+
+    A Java variable may look like:
+    int foo = 1
+
+    Python doesn't care about types:
+    foo = 1
+    """
+
+    identifier: AnyStr
+    value: [BinaryOperation, Factor]
+
