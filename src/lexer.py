@@ -9,6 +9,64 @@ all the code into a single file
 """
 
 
+# These are keywords and # cannot be identifiers
+reserved = {
+    "abstract": "ABSTRACT",
+    "assert": "ASSERT",
+    "boolean": "BOOLEAN",
+    "break": "BREAK",
+    "byte": "BYTE",
+    "case": "CASE",
+    "catch": "CATCH",
+    "char": "CHAR",
+    "class": "CLASS",
+    "continue": "CONTINUE",
+    "default": "DEFAULT",
+    "do": "DO",
+    "double": "DOUBLE",
+    "else": "ELSE",
+    "enum": "ENUM",
+    "extends": "EXTENDS",
+    "final": "FINAL",
+    "finally": "FINALLY",
+    "float": "FLOAT",
+    "for": "FOR",
+    "if": "IF",
+    "implements": "IMPLEMENTS",
+    "import": "IMPORT",
+    "instanceof": "INSTANCEOF",
+    "long": "LONG",
+    "native": "NATIVE",
+    "new": "NEW",
+    "package": "PACKAGE",
+    "private": "PRIVATE",
+    "protected": "PROTECTED",
+    "public": "PUBLIC",
+    "return": "RETURN",
+    "short": "SHORT",
+    "static": "STATIC",
+    "strictfp": "STRICTFP",
+    "super": "SUPER",
+    "switch": "SWITCH",
+    "synchronized": "SYNCHRONIZED",
+    "this": "THIS",
+    "throw": "THROW",
+    "throws": "THROWS",
+    "transient": "TRANSIENT",
+    "try": "TRY",
+    "void": "VOID",
+    "volatile": "VOLATILE",
+    "while": "WHILE",
+
+    # Useless; reserved for future use
+    "const": "CONST",
+    "goto": "GOTO",
+
+    # Literals that cannot be used for keywords
+    "true": "TRUE",
+    "false": "FALSE",
+    "null": "NULL",
+}
 literals = [
     "+", "-", "*", "/",  # Arithmetic
 ]
