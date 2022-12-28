@@ -60,7 +60,14 @@ def p_expression(p):
 
 def p_var_assignment(p):
     """
-    var_assignment : INT ID '=' expression
+    var_assignment : BYTE ID '=' expression
+                   | SHORT ID '=' expression
+                   | INT ID '=' expression
+                   | LONG ID '=' expression
+                   | FLOAT ID '=' expression
+                   | DOUBLE ID '=' expression
+                   | CHAR ID '=' expression
+                   | BOOLEAN ID '=' expression
     """
 
     p[0] = components.VariableAssignment(p[2], p[4])

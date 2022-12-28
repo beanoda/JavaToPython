@@ -74,4 +74,3 @@ class VariableAssignment(object):
 
     identifier: AnyStr
     value: [BinaryOperation, Factor]
-
