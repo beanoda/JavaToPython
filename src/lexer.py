@@ -61,13 +61,13 @@ reserved = {
     # "while": "WHILE",
 
     # Useless; reserved for future use
-    "const": "CONST",
-    "goto": "GOTO",
+    # "const": "CONST",
+    # "goto": "GOTO",
 
     # Literals that cannot be used for keywords
-    "true": "TRUE",
-    "false": "FALSE",
-    "null": "NULL",
+    # "true": "TRUE",
+    # "false": "FALSE",
+    # "null": "NULL",
 }
 
 literals = [
