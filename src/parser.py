@@ -71,3 +71,7 @@ def p_var_assignment(p):
     """
 
     p[0] = components.VariableAssignment(p[2], p[4])
+
+
+def p_error(p):
+    print("Syntax Error")
