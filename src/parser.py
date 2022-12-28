@@ -62,9 +62,9 @@ def p_var_assignment(p):
     """
     var_assignment : BYTE ID '=' expression
                    | SHORT ID '=' expression
-                   | INT ID '=' expression
+                   | INT_KW ID '=' expression
                    | LONG ID '=' expression
-                   | FLOAT ID '=' expression
+                   | FLOAT_KW ID '=' expression
                    | DOUBLE ID '=' expression
                    | CHAR ID '=' expression
                    | BOOLEAN ID '=' expression

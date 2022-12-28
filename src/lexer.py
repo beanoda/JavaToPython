@@ -29,13 +29,13 @@ reserved = {
     # "extends": "EXTENDS",
     # "final": "FINAL",
     # "finally": "FINALLY",
-    "float": "FLOAT",
+    "float": "FLOAT_KW",
     # "for": "FOR",
     # "if": "IF",
     # "implements": "IMPLEMENTS",
     # "import": "IMPORT",
     # "instanceof": "INSTANCEOF",
-    "int": "INT",
+    "int": "INT_KW",
     # "interface": "INTERFACE",
     "long": "LONG",
     # "native": "NATIVE",
@@ -82,11 +82,6 @@ tokens = (
     "ID",  # short for Identifier
 ) + tuple(reserved.values())
 
-# Java's doubles are just floats in Python
-# Java's floats are difficult because they have an f appended to them
-# ill implement Java's floats later
-t_FLOAT = r"\d+\.\d+"
-
 # Java has bytes, shorts, ints, and longs which are all just integers
 # inside of Python
 t_INT = r"\d+"
@@ -94,6 +89,16 @@ t_INT = r"\d+"
 # Tabs matter in Python but in Java, they do not
 # There might be an issue here later on when I start parsing files
 t_ignore = " \t\n\r"
+
+
+# 1.1f or 1.1d or 1.1 or 1f or 1d
+def t_FLOAT(t):
+    r"""(\d+\.\d+f)|(\d+\.\d+d)|(\d+\.\d+)|(\d+f)|(\d+d)|(\d+)"""
+
+    # Remove 'f' and 'd' from the end of the string
+    t.value = t.value.strip("f").strip("d")
+
+    return t
 
 
 def t_ID(t):
