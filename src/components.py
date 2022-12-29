@@ -4,8 +4,8 @@ from __future__ import annotations
 This module contains classes that represent parts of
 the Python language
 
-For instance, there is a component (class) for an Integer,
-for a Float, and for a Function.
+For instance, there is a component (class) for an Expression,
+for a While Loop, and for a Function.
 """
 
 
@@ -15,73 +15,36 @@ from enum import Enum
 
 
 @dataclasses.dataclass
-class Integer(object):
+class BinaryOperation(object):
     """
-    *Integer* represents a Python integer
-
-    - **value**: a field that stores the integer value as a string
-    """
-
-    value: AnyStr
-
-
-@dataclasses.dataclass
-class Float(object):
-    """
-    _Float_ represents a Python float
-
-    - **value**: a field that stores the float value as a string
+    I have decided to opt for few arithmetic classes
+    and implement order of operations through the parser's
+    precedence instead of writing a bunch of classes
+    just for order of operations
     """
 
-    value: AnyStr
+    left: Union[Factor, AnyStr]
+    operation: Operator
+    right: Union[Factor, AnyStr]
+
+    def __repr__(self):
+        return "(" + repr(self.left) + \
+               self.operation.value + repr(self.right) + ")"
 
 
 @dataclasses.dataclass
 class Factor(object):
     """
-    *Factors* are the building blocks of *Terms* and
-    *Expressions*
-
-    - **value**: is an *Integer* or a *Float*
+    Unary refers to unary minus which deals with negative
+    numbers. Ex: -1 is an example of unary minus but 1 is
+    simply a factor
     """
 
-    value: Union[Integer, Float]
+    value: AnyStr
+    unary: bool = False
 
-
-@dataclasses.dataclass
-class Term(object):
-    """
-    *Terms* amalgamate two *Factors* together using a
-    multiplication (*) or division (/) operator
-
-    - **left**: is a *Factor*
-
-    - **operator**: is an *Operator* (either MULTIPLY or DIVIDE)
-
-    - **right**: is a *Factor*
-    """
-
-    left: Factor
-    operator: Operator
-    right: Factor
-
-
-@dataclasses.dataclass
-class Expression(object):
-    """
-    *Expressions* can get quite complex. *Terms* and
-    *Factors* are their primary components along with
-    *Operators*, however, *Expressions* can contain other
-    *Expressions*
-
-    - **left**: is a *Term*
-    - **operator**: is an *Operator* (either PLUS or MINUS)
-    - **right** is a *Term*
-    """
-
-    left: Term
-    operator: Operator
-    right: Term
+    def __repr__(self):
+        return f"(-{self.value})" if self.unary else self.value
 
 
 @dataclasses.dataclass
@@ -95,3 +58,19 @@ class Operator(Enum):
     MINUS = "-"
     MULTIPLY = "*"
     DIVIDE = "/"
+
+
+@dataclasses.dataclass
+class VariableAssignment(object):
+    """
+    Variables in Java are different than in Python.
+
+    A Java variable may look like:
+    int foo = 1
+
+    Python doesn't care about types:
+    foo = 1
+    """
+
+    identifier: AnyStr
+    value: [BinaryOperation, Factor]
