@@ -72,7 +72,6 @@ def p_var_assignment(p):
     """
 
     # ID ID is kind of a catch-all
-
     p[0] = components.VariableAssignment(p[2], p[4])
 
 
