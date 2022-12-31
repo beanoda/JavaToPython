@@ -30,4 +30,4 @@ def parse(input_data: str) -> None:
 if __name__ == "__main__":
     while True:
         data = input(">>> ")
-        parse(data)
+        tokenize(data)
